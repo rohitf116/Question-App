@@ -85,11 +85,12 @@ exports.loginAdmin = async (req, res) => {
         status: false,
         message: "Please Provide  Email, Password and secret",
       });
+    console.log(password, email, secret);
     const user = await AdminModel.findOne({ email, password, secret });
     if (!user)
       return res.status(401).json({
         status: false,
-        message: "The email or Password you are using is wrong",
+        message: "The email , secret or Password you are using is wrong",
       });
 
     const token = jwt.sign(
@@ -106,6 +107,7 @@ exports.loginAdmin = async (req, res) => {
     res.status(200).json({
       status: true,
       message: "Success",
+      isAdmin: true,
       name: user.name,
       token: token,
     });

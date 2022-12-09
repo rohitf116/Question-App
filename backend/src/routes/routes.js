@@ -6,8 +6,10 @@ const {
   createQuestion,
   getQuestion,
   updateQuestion,
+  getOneQuestion,
+  getAllQuestion,
 } = require("../controller/questionController");
-const { giveExam } = require("../controller/examController");
+const { giveExam, getResult } = require("../controller/examController");
 const { authenticate } = require("../auth/auth");
 const { authorization } = require("../auth/authorization");
 
@@ -21,7 +23,10 @@ router.get("/user", authenticate, authorization, getUser);
 //question
 router.post("/question", authenticate, authorization, createQuestion);
 router.get("/question", getQuestion);
+router.get("/question/:id", getOneQuestion);
+router.get("/questionall", getAllQuestion);
 router.patch("/question/:id", authenticate, authorization, updateQuestion);
 //exam
 router.post("/exam", authenticate, giveExam);
+router.get("/result", getResult);
 module.exports = router;

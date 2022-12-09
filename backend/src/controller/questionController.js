@@ -40,8 +40,9 @@ exports.createQuestion = async (req, res) => {
         .json({ status: false, message: "Body should not be empty" });
     }
     const { files } = req;
+    console.log(req.body, "req");
     let uploaded = null;
-    if (files.length) {
+    if (files?.length) {
       const fileType = files[0].mimetype;
       if (fileType !== "image/jpeg" && fileType !== "video/mp4") {
         return res
@@ -224,6 +225,47 @@ exports.updateQuestion = async (req, res) => {
     return res
       .status(200)
       .json({ status: false, message: "Success", data: questionUpdated });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ status: false, message: "Server error", error: error.message });
+  }
+};
+
+exports.getOneQuestion = async (req, res) => {
+  try {
+    const id = req.params.id;
+    console.log(req.params);
+    if (!isValidObjectId(id)) {
+      return res.status(400).json({
+        status: false,
+        message: "id is invalid",
+      });
+    }
+    const foundQuestion = await QuestionModel.findOne({ _id: id });
+    console.log(foundQuestion);
+    if (!foundQuestion) {
+      return res
+        .status(404)
+        .json({ status: false, message: "No question found" });
+    }
+    res
+      .status(200)
+      .json({ status: true, message: "Success", data: foundQuestion });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ status: false, message: "Server error", error: error.message });
+  }
+};
+exports.getAllQuestion = async (req, res) => {
+  try {
+    const foundQuestions = await QuestionModel.find();
+    res
+      .status(200)
+      .json({ status: true, message: "Success", data: foundQuestions });
   } catch (error) {
     console.log(error);
     res

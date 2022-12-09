@@ -5,6 +5,7 @@ dotenv.config();
 exports.authenticate = (req, res, next) => {
   try {
     const auhorization = req.headers.authorization;
+    console.log(auhorization, "auhorization");
     if (!auhorization) {
       return res
         .status(401)

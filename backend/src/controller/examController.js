@@ -35,7 +35,7 @@ exports.giveExam = async (req, res) => {
     let user;
     const auhorization = req.headers.authorization;
     const token = auhorization.split(" ")[1];
-    console.log(process.env.JWT_SECRET);
+    console.log(req.body);
     jwt.verify(token, process.env.JWT_SECRET, (error, response) => {
       console.log(error);
       if (error) {
@@ -128,6 +128,20 @@ exports.giveExam = async (req, res) => {
       marks: count,
     });
     res.status(201).json({ status: true, message: "Success", data: examGiven });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ status: false, message: "Server error", error: error.message });
+  }
+};
+
+exports.getResult = async (req, res) => {
+  try {
+    const foundQuestion = await ExamModel.find();
+    res
+      .status(200)
+      .json({ status: true, message: "Success", data: foundQuestion });
   } catch (error) {
     console.log(error);
     res
