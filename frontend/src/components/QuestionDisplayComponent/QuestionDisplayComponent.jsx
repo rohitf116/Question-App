@@ -17,7 +17,17 @@ const QuestionDisplayComponent = (Props) => {
       <Container className="border my-3">
         <Row>
           <Col md="4">
-            <Image src={tutorial} className="my-3" fluid></Image>
+            {tutorial?.slice(tutorial.length - 3) === "mp4" ? (
+              <>
+                <video
+                  style={{ height: 360, width: "100%" }}
+                  src={question.tutorial}
+                  controls
+                />
+              </>
+            ) : (
+              <Image src={tutorial} className="my-3" fluid></Image>
+            )}
           </Col>
           <Col md="4" className="my-auto ">
             <>

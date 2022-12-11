@@ -10,6 +10,7 @@ import {
   Form,
   Modal,
   Alert,
+  Ratio,
 } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 const AllQuestionScreen = () => {
@@ -19,6 +20,7 @@ const AllQuestionScreen = () => {
   const [deleteId, setDeleteId] = useState(null);
   const [user, setUser] = useState(null);
   const [isDeleted, SetIsDeleted] = useState(false);
+
   const handleClose = () => setShow(false);
   const deleteHandler = async (e) => {
     e.preventDefault();
@@ -113,7 +115,21 @@ const AllQuestionScreen = () => {
                     <Container className="border my-3">
                       <Row>
                         <Col md="4">
-                          <Image src={tutorial} className="my-3" fluid></Image>
+                          {tutorial?.slice(tutorial.length - 3) === "mp4" ? (
+                            <>
+                              <video
+                                style={{ height: 360, width: "100%" }}
+                                src={tutorial}
+                                controls
+                              />
+                            </>
+                          ) : (
+                            <Image
+                              src={tutorial}
+                              className="my-3"
+                              fluid
+                            ></Image>
+                          )}
                         </Col>
                         <Col md="4" className="my-auto ">
                           <>
@@ -157,6 +173,7 @@ const AllQuestionScreen = () => {
                             </Form>
                           </>
                         </Col>
+
                         <Col md="4" className="my-auto mx-auto">
                           <Button
                             onClick={() => {

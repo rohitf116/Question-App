@@ -82,7 +82,22 @@ const ExamScreen = () => {
             <Container className="border my-3">
               <Row>
                 <Col md="6">
-                  <Image src={question.tutorial} className="my-3" fluid></Image>
+                  {question?.tutorial?.slice(question?.tutorial.length - 3) ===
+                  "mp4" ? (
+                    <>
+                      <video
+                        style={{ height: 360, width: "100%" }}
+                        src={question.tutorial}
+                        controls
+                      />
+                    </>
+                  ) : (
+                    <Image
+                      src={question?.tutorial}
+                      className="my-3"
+                      fluid
+                    ></Image>
+                  )}
                 </Col>
                 <Col md="6" className="my-auto ">
                   <>
