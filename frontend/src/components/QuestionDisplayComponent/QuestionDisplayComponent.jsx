@@ -1,5 +1,5 @@
 import { Col, Container, Row, Image, Form, Button } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const QuestionDisplayComponent = (Props) => {
   const {
@@ -12,8 +12,6 @@ const QuestionDisplayComponent = (Props) => {
     correctAnswer,
     tutorial,
   } = Props.questionDone;
-  const navigate = useNavigate();
-  //   console.log(newAns, "newAns");
   return (
     <>
       <Container className="border my-3">

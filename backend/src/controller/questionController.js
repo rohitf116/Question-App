@@ -273,3 +273,20 @@ exports.getAllQuestion = async (req, res) => {
       .json({ status: false, message: "Server error", error: error.message });
   }
 };
+
+exports.deleteById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await QuestionModel.findOneAndDelete({ id });
+    res.status(200).json({
+      status: true,
+      message: "Your file is deleted",
+      data: "Your file is deleted",
+    });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ status: false, message: "Server error", error: error.message });
+  }
+};

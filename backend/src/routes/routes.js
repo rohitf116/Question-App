@@ -8,6 +8,7 @@ const {
   updateQuestion,
   getOneQuestion,
   getAllQuestion,
+  deleteById,
 } = require("../controller/questionController");
 const { giveExam, getResult } = require("../controller/examController");
 const { authenticate } = require("../auth/auth");
@@ -26,6 +27,8 @@ router.get("/question", getQuestion);
 router.get("/question/:id", getOneQuestion);
 router.get("/questionall", getAllQuestion);
 router.patch("/question/:id", authenticate, authorization, updateQuestion);
+router.delete("/question/:id", authenticate, authorization, deleteById);
+
 //exam
 router.post("/exam", authenticate, giveExam);
 router.get("/result", getResult);

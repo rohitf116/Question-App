@@ -4,14 +4,15 @@ const dotenv = require("dotenv");
 dotenv.config();
 exports.authenticate = (req, res, next) => {
   try {
-    const auhorization = req.headers.authorization;
-    console.log(auhorization, "auhorization");
-    if (!auhorization) {
+    const authorization = req.headers.authorization;
+    console.log(authorization, "auhorization");
+    console.log(req.headers, "req.headers");
+    if (!authorization) {
       return res
         .status(401)
         .json({ status: false, message: "token is missing" });
     }
-    const token = auhorization.split(" ")[1];
+    const token = authorization.split(" ")[1];
 
     jwt.verify(token, process.env.JWT_SECRET, (error, response) => {
       if (error) {

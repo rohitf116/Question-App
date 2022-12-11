@@ -34,7 +34,6 @@ const ExamScreen = () => {
     const userInfofromStorage = localStorage.getItem("userInfo")
       ? JSON.parse(localStorage.getItem("userInfo"))
       : null;
-    console.log(userInfofromStorage, "userInfofromStorage");
 
     if (userInfofromStorage === null) {
       navigate("/login");
@@ -43,7 +42,6 @@ const ExamScreen = () => {
       try {
         const { data } = await axios.get("http://localhost:8000/question");
         setExam(data.data);
-        console.log(exam, "exam");
       } catch (error) {
         console.log(error.response.data.message);
         setMessage(error.response.data.message);
@@ -69,7 +67,6 @@ const ExamScreen = () => {
         ans,
         config
       );
-      console.log(data, "exam given");
       setSuccess(data.message);
     } catch (error) {
       console.log(error.response.data.message);
